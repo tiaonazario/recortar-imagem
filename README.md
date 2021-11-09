@@ -1,5 +1,5 @@
 # recortar-imagem
 
- Recortar imagem
+Recortar imagem
 
 `$ pip install Pillow`

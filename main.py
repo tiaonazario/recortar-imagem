@@ -1,9 +1,11 @@
 import os
 from PIL import Image
 
+
 def extensao(arquivo):
     index = arquivo.rfind('.')
     return arquivo[index:]
+
 
 def imagens(diretorio):
     ext_img = ['.png', '.jpg', '.jpeg']
@@ -13,7 +15,7 @@ def imagens(diretorio):
         arquivos = os.listdir(diretorio)
         if arquivos == []:
             print('Não existe imagens na pasta.')
-        
+
         lista = []
         for nome in arquivos:
             if os.path.isfile(os.path.join(diretorio, nome)):
@@ -22,6 +24,7 @@ def imagens(diretorio):
                     arquivo = os.path.join(diretorio, nome)
                     lista.append([arquivo, nome])
         return lista
+
 
 def recortar(diretorio, onde='img', esquerda=0, topo=60, direita=1120, fundo=700):
     lista_imagens = imagens(diretorio)
@@ -40,8 +43,24 @@ def recortar(diretorio, onde='img', esquerda=0, topo=60, direita=1120, fundo=700
         recortada = img.crop(area)
         recortada.save(endereco)
 
-        print(f"Salvo '{arquivo}' => '{endereco}'")
+        print(f"'{arquivo}' => recortado e salvo com sucesso!")
 
-diretorio = str(input('Diretorio onde estão as imagens: '))
-salvar = str(input('Diretorio onde deve salvar as imagens: '))
-recortar(diretorio, salvar)
+
+op = True
+while op:
+    print(40*'==')
+    print('Recortar Imagens')
+    print(40*'--')
+    print()
+    diretorio = str(input('Diretorio onde estão as imagens: '))
+    salvar = str(input('Diretorio onde deve salvar as imagens: '))
+    recortar(diretorio, salvar)
+
+    print()
+    opcao = input("Aperte 'f' para finalizar. ")
+    if opcao.lower() == 'f':
+        op = False
+
+    print()
+    print('FIM!!!')
+    print(40*'==')
